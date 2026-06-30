@@ -92,3 +92,57 @@ CREATE TABLE achievement_go_mapping (
     FOREIGN KEY (go_id)
     REFERENCES graduate_outcomes(go_id)
 );
+
+CREATE TABLE notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    user_id Varchar(100) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id)
+);
+
+CREATE TABLE placements (
+    placement_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    achievement_id INT NOT NULL,
+
+    company_name VARCHAR(255),
+
+    package_lpa DECIMAL(5,2),
+
+    offer_date DATE,
+
+    FOREIGN KEY (achievement_id) REFERENCES achievements(achievement_id)
+);
+CREATE TABLE certifications (
+    certification_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    achievement_id INT NOT NULL,
+
+    issuer VARCHAR(255),
+
+    issue_date DATE,
+
+    certificate_id VARCHAR(100),
+
+    FOREIGN KEY (achievement_id) REFERENCES achievements(achievement_id)
+);
+CREATE TABLE internships (
+    internship_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    achievement_id INT NOT NULL,
+
+    company_name VARCHAR(255),
+
+    duration_months INT,
+
+    start_date DATE,
+    end_date DATE,
+
+    FOREIGN KEY (achievement_id) REFERENCES achievements(achievement_id)
+);
+
